@@ -32,6 +32,7 @@ class InstallerServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Zisunal\LaravelInstaller\Console\InstallCommand::class,
+                \Zisunal\LaravelInstaller\Console\MakeCommand::class,
             ]);
         }
 
