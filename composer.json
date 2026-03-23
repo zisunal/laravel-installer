@@ -1,0 +1,31 @@
+{
+  "name": "zisunal/laravel-installer",
+  "version": "1.0.0",
+  "description": "Highly customizable Laravel installer package",
+  "type": "library",
+  "license": "mit",
+  "autoload": {
+    "psr-4": {
+      "Zisunal\\LaravelInstaller\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Zisunal\\LaravelInstaller\\InstallerServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "illuminate/support": "^12.0",
+    "illuminate/filesystem": "^12.0",
+    "illuminate/routing": "^12.0",
+    "illuminate/console": "^12.0",
+    "livewire/livewire": "^4.0",
+    "spatie/laravel-livewire-wizard": ">2.0",
+    "winter/laravel-config-writer": ">1.2",
+    "laravel/prompts": "^0.3.15",
+    "binafy/laravel-stub": "^1.1"
+  }
+}

@@ -1,0 +1,59 @@
+<?php
+
+namespace {{ NAME_SPACE }};
+
+class {{ CLASS_NAME }} extends AbstractInstallerStep
+{
+
+    // Your public properties here to hold the form's values
+
+    public function mount(): void
+    {
+        // Mount the initial values of all the public properties of this class
+
+    }
+
+    public static function title(): string
+    {
+        return {{ TITLE }};
+    }
+
+    public static function description(): ?string
+    {
+        return {{ DESCRIPTION }};
+    }
+
+    public static function order(): int
+    {
+        return {{ ORDER }};
+    }
+
+    protected function rules(): array
+    {
+        // Implement form fields' rules here using laravel rules
+
+    }
+
+    public function goToNextStep(): void
+    {
+        /*  Your code here to validate and save the current fields.
+            All the field should be saved in session()->put() with any of these keys:
+            'environment', 'database', 'admin-user', 'config'.
+            Don't override the array. Remember to keep the values from other steps. Example:
+            session()->put( 'environment', [
+                ...session( 'environment' ) ?? [],
+                'APP_NAME' => $this->app_name,
+                'APP_URL' => $this->app_url,
+                'APP_ENV' => $this->app_env,
+                'APP_LOCALE' => $this->app_locale,
+            ] );
+        */
+
+        parent::next();
+    }
+
+    public function render()
+    {
+        return view( 'installer.steps.{{ VIEW_NAME }}' );
+    }
+}

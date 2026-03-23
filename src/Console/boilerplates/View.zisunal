@@ -1,0 +1,36 @@
+<div class="rounded-3xl bg-white p-6 shadow-xl ring-1 ring-slate-200">
+    @include( 'installer::partials.navigation', [ 'steps' => $steps ] )
+
+    <div class="space-y-6">
+        <div>
+            <h2 class="text-2xl font-semibold text-slate-900">{{ static::title() }}</h2>
+            <p class="mt-2 text-slate-600">{{ static::description() }}</p>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+            {{-- Your inputs, labels and other things here. You can use any public properties from the class. For livewire documentation visit: https://livewire.laravel.com/ --}}
+            
+
+        </div>
+
+        <div class="flex items-center justify-between pt-2">
+            <button
+                type="button"
+                wire:click="previousStep"
+                class="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                wire:click="goToNextStep"
+                class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 cursor-pointer"
+                wire:loading.attr="disabled"
+            >
+                <span wire:loading.remove>Continue</span>
+                <span wire:loading>Saving…</span>
+            </button>
+        </div>
+    </div>
+</div>
