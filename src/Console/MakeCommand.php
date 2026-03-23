@@ -5,7 +5,9 @@ namespace Zisunal\LaravelInstaller\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Binafy\LaravelStub\Facades\LaravelStub;
-use function Laravel\Prompts\text, Laravel\Prompts\select, Laravel\Prompts\textarea, Laravel\Prompts\number;
+use Illuminate\Support\Facades\File;
+
+use function Laravel\Prompts\text, Laravel\Prompts\select, Laravel\Prompts\number;
 
 class MakeCommand extends Command
 {
@@ -19,7 +21,7 @@ class MakeCommand extends Command
         $title = text( label: 'Installer step title', placeholder: 'e.g. Redis Setup' );
         $className = Str::studly( Str::singular( $title ) ) . 'Step';
         $viewName = Str::kebab( Str::singular( $title ) );
-        $description = textarea( label: 'Installer step description', placeholder: 'e.g. Configure Redis connection settings.' );
+        $description = text( label: 'Installer step description', placeholder: 'e.g. Configure Redis connection settings.' );
         $order = number( 
             label: 'Installer step order', 
             placeholder: 'e.g. 5', 
@@ -32,7 +34,7 @@ class MakeCommand extends Command
                 if ( $value > 99 ) {
                     return 'Order must be less than 100.';
                 }
-                return true;
+                return null;
             },
             default: $this->getNextOrder()
         );
@@ -42,7 +44,7 @@ class MakeCommand extends Command
             $path = select(
                 label: 'Where would you like to create the installer step?',
                 options: collect( $pathsWithNamespacesArray )->mapWithKeys( function ( $namespace, $path ) {
-                    return [ $namespace => $path ];
+                    return [ $path => $namespace ];
                 } )->toArray()
             );
             $namespace = collect( $pathsWithNamespacesArray )->get( $path );
@@ -52,6 +54,8 @@ class MakeCommand extends Command
             $namespace = app()->getNamespace() . 'Installer\\Steps';
             $this->info( 'This installer step will not be auto-discoverable. You will need to add it to the installer configuration.' );
         }
+        File::ensureDirectoryExists( $path );
+        File::ensureDirectoryExists( resource_path( 'views/installer/steps/' ) );
         LaravelStub::from( __DIR__ . '/boilerplates/Step.zisunal' )
             ->to( $path )
             ->name( $className )

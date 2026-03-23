@@ -1,6 +1,7 @@
 <?php
 
 namespace {{ NAME_SPACE }};
+use Zisunal\LaravelInstaller\Livewire\Steps\AbstractInstallerStep;
 
 class {{ CLASS_NAME }} extends AbstractInstallerStep
 {
@@ -15,12 +16,12 @@ class {{ CLASS_NAME }} extends AbstractInstallerStep
 
     public static function title(): string
     {
-        return {{ TITLE }};
+        return "{{ TITLE }}";
     }
 
     public static function description(): ?string
     {
-        return {{ DESCRIPTION }};
+        return "{{ DESCRIPTION }}";
     }
 
     public static function order(): int
@@ -30,8 +31,10 @@ class {{ CLASS_NAME }} extends AbstractInstallerStep
 
     protected function rules(): array
     {
-        // Implement form fields' rules here using laravel rules
-
+        return [
+            // Implement form fields' rules here using laravel rules
+            
+        ];
     }
 
     public function goToNextStep(): void
