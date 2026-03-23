@@ -83,10 +83,14 @@ class MakeCommand extends Command
     private function getNextOrder(): int
     {
         $steps = count( config( 'installer.steps', [] ) );
-        $discoverable = config( 'installer.discover.enabled', true );
-        if ( $discoverable ) {
-            $steps += count( config( 'installer.discover.paths', [] ) );
+        logger()->info( "Default steps: " . ( $steps ) );
+        if ( config( 'installer.discover.enabled', true ) ) {
+            foreach ( config( 'installer.discover.paths', [] ) as $path => $namespace ) {
+                $files = File::files( $path );
+                $steps += count( $files );
+            }
         }
-        return $steps;
+        logger()->info( "Calculated next installer step order: " . ( $steps ) );
+        return $steps + 1;
     }
 }
