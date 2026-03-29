@@ -56,7 +56,7 @@ class WelcomeStep extends AbstractInstallerStep
         if ( $this->dbDriver === 'mariadb' ) {
             $this->dbDriver = 'mysql';
         }
-        session()->put( 'database', [
+        session()->put( [ 'database' => [
             ...session( 'database' ) ?? [],
             'DB_CONNECTION' => $this->dbDriver,
             'DB_HOST'       => $this->dbHost,
@@ -64,7 +64,7 @@ class WelcomeStep extends AbstractInstallerStep
             'DB_DATABASE'   => $this->dbName,
             'DB_USERNAME'   => $this->dbUsername,
             'DB_PASSWORD'   => $this->dbPassword,
-        ] );
+        ] ] );
         session()->put( '_installer_config', [
             'generate_app_key' => config( 'installer.generate_app_key', true ),
             'run_migrations' => config( 'installer.run_migrations', true ),

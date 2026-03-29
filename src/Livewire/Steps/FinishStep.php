@@ -34,12 +34,17 @@ class FinishStep extends AbstractInstallerStep
         ] );
     }
 
-    private function getSummary( bool $toPreview = false, array $valuesToHide = [ 'password', 'token' ] ): array
+    private function getSummary( bool $toPreview = false, array $valuesToHide = [ 'password', 'token', 'key', 'secret' ] ): array
     {
         $valuesToHide = $toPreview ? array_map( 'strtolower', $valuesToHide ) : [];
 
-        return collect( session()->get( 'environment' ) + session()->get( 'database' ) + session()->get( 'admin-user' ) + session()->get( 'providers' ) + session()->get( 'config' ) )
-            ->reject( fn ( $value, $key ) => str_starts_with( $key, '_' ) )
+        return collect( [
+            'environment' => session( 'environment' ) ?? [],
+            'database' => session( 'database' ) ?? [],
+            'admin-user' => session( 'admin-user' ) ?? [],
+            'config' => session( 'config' ) ?? [],
+            'providers' =>session( 'providers' ) ?? []
+        ] )
             ->map( function ( $value, $key ) use ( $valuesToHide ) {
                 if ( is_array( $value ) ) {
                     return collect( $value )
