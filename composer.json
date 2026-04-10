@@ -1,6 +1,6 @@
 {
   "name": "zisunal/laravel-installer",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Highly customizable Laravel installer package",
   "type": "library",
   "license": "mit",

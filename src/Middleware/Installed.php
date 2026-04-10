@@ -4,6 +4,7 @@ namespace Zisunal\LaravelInstaller\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\HttpFoundation\Response;
 use Zisunal\LaravelInstaller\Support\InstallLock;
 use Zisunal\LaravelInstaller\Actions\WriteEnv;
@@ -50,6 +51,9 @@ class Installed
                         'CACHE_STORE' => 'file',
                     ] );
                 }
+            }
+            if ( env( 'APP_KEY', '' ) == '' ) {
+                Artisan::call( 'key:generate' );
             }
             return redirect()->route( 'installer.index' );
         }
