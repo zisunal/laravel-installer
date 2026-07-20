@@ -1,3 +1,4 @@
+<img width="2752" height="1536" alt="laravel-installer" src="https://github.com/user-attachments/assets/e833abf4-34c3-4234-8290-1568528bbeb9" />
 # 🚀 Laravel Installer
 
 <p align="center">
